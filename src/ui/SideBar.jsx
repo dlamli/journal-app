@@ -23,7 +23,7 @@ export const SideBar = ({ drawerWidth }) => {
                 variant="permanent"
                 open
                 sx={{
-                    display: { xs: "block" },
+                    display: { xs: "none", sm: "block" },
                     "& .MuiDrawer-paper": {
                         boxSizing: "border-box",
                         width: drawerWidth,
@@ -31,7 +31,7 @@ export const SideBar = ({ drawerWidth }) => {
                 }}
             >
                 <Toolbar>
-                    <Typography variant="h6" nowrap component="div">
+                    <Typography variant="h6" nowrap="true" component="div">
                         User
                     </Typography>
                 </Toolbar>

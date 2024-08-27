@@ -40,7 +40,7 @@ export const NavBar = ({ drawerWidth }) => {
                     justifyContent="space-between"
                     alignItems="center"
                 >
-                    <Typography variant="h6" nowrap component="div">
+                    <Typography variant="h6" nowrap='true' component="div">
                         JournalApp
                     </Typography>
                     <Link component={RouterLink} to="/auth/login">
