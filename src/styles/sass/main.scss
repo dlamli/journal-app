@@ -1,0 +1,6 @@
+@use 'constants/variables' as *;
+
+
+.box-shadow {
+  box-shadow: 0 5px 5px $box-shadow-color;
+}

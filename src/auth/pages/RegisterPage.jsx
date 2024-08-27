@@ -51,7 +51,7 @@ export const RegisterPage = () => {
                             Have Account?
                         </Typography>
                         <Link
-                            color="inherit"
+                            color="primary.main"
                             to="/auth/login"
                             component={RouterLink}
                         >
