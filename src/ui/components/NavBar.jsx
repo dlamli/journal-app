@@ -7,9 +7,17 @@ import {
     Typography,
     Link,
 } from "@mui/material";
+import { useDispatch } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
+import { starLogout } from "src/store";
 
 export const NavBar = ({ drawerWidth }) => {
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+        dispatch(starLogout());
+    };
+
     return (
         <AppBar
             position="fixed"
@@ -40,11 +48,11 @@ export const NavBar = ({ drawerWidth }) => {
                     justifyContent="space-between"
                     alignItems="center"
                 >
-                    <Typography variant="h6" nowrap='true' component="div">
+                    <Typography variant="h6" nowrap="true" component="div">
                         JournalApp
                     </Typography>
                     <Link component={RouterLink} to="/auth/login">
-                        <IconButton color="error">
+                        <IconButton color="error" onClick={handleLogout}>
                             <LogoutOutlined />
                         </IconButton>
                     </Link>

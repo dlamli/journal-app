@@ -1,24 +1,35 @@
 import { useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Google } from "@mui/icons-material";
 import { Link as RouterLink } from "react-router-dom";
-import { Button, Grid, Link, TextField, Typography } from "@mui/material";
+import {
+    Alert,
+    Button,
+    Grid,
+    Link,
+    TextField,
+    Typography,
+} from "@mui/material";
 
-import { AuthLayout } from "src/auth/layout/AuthLayout";
+import { AuthLayout } from "src/auth";
 import { useForm } from "src/hooks";
-import { checkAuthentication, checkGoogleSignIn } from "src/store";
-import { useDispatch, useSelector } from "react-redux";
-import { formInitialData } from "src/data/data";
+import { checkGoogleSignIn, startLoginWithEmailPassword } from "src/store";
+import { formInitialData, STATUS_CHECKING } from "src/data/data";
 
 export const LoginPage = () => {
     const dispatch = useDispatch();
-    const { status } = useSelector((state) => state.auth);
-    const { email, password, onInputChange, onResetForm } = useForm(formInitialData);
+    const { status, errorMessage } = useSelector((state) => state.auth);
+    const { email, password, onInputChange, onResetForm } =
+        useForm(formInitialData);
 
-    const isAuthenticating = useMemo(() => status === "checking", [status]);
+    const isAuthenticating = useMemo(
+        () => status === STATUS_CHECKING,
+        [status]
+    );
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(checkAuthentication(email, password));
+        dispatch(startLoginWithEmailPassword({ email, password }));
         onResetForm();
     };
 
@@ -28,7 +39,10 @@ export const LoginPage = () => {
 
     return (
         <AuthLayout title="LoginPage">
-            <form onSubmit={handleSubmit}>
+            <form
+                onSubmit={handleSubmit}
+                className="animate__animated animate__fadeIn animate__faster"
+            >
                 <Grid container>
                     <Grid item xs={12} sx={{ mt: 2 }}>
                         <TextField
@@ -50,6 +64,17 @@ export const LoginPage = () => {
                             value={password}
                             onChange={onInputChange}
                         />
+                    </Grid>
+
+                    <Grid container>
+                        <Grid
+                            item
+                            xs={12}
+                            display={errorMessage ? "" : "none"}
+                            sx={{ marginBlockStart: 2 }}
+                        >
+                            <Alert severity="error">{errorMessage}</Alert>
+                        </Grid>
                     </Grid>
 
                     <Grid container spacing={2} sx={{ marginBlock: 1 }}>

@@ -54,3 +54,15 @@ export const formInitialData = {
     password: "",
     displayName: "",
 };
+
+const AUTH_STATUS = {
+    STATUS_NOT_AUTHENTICATED: "not-authenticated",
+    STATUS_AUTHENTICATED: "authenticated",
+    STATUS_CHECKING: "checking",
+};
+
+export const {
+    STATUS_NOT_AUTHENTICATED,
+    STATUS_AUTHENTICATED,
+    STATUS_CHECKING,
+} = AUTH_STATUS;
