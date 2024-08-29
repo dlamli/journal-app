@@ -1,15 +1,28 @@
+import { useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
-import { Button, Grid, Link, TextField, Typography } from "@mui/material";
-import { AuthLayout } from "src/auth/layout/AuthLayout";
+import {
+    Alert,
+    Button,
+    Grid,
+    Link,
+    TextField,
+    Typography,
+} from "@mui/material";
+
+import { AuthLayout } from "src/auth";
 import { useForm } from "src/hooks";
-import { formInitialData } from "src/data/data";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { formInitialData, STATUS_CHECKING } from "src/data/data";
 import { startCreatingUserWithEmailPassword } from "src/store";
 
 export const RegisterPage = () => {
     const [formSubmited, setformSubmited] = useState(false);
     const dispatch = useDispatch();
+    const { status, errorMessage } = useSelector((state) => state.auth);
+    const isCheckingAuthentication = useMemo(
+        () => status === STATUS_CHECKING,
+        [status]
+    );
 
     const formValidations = {
         displayName: [(value) => value.length >= 1, "Name is required"],
@@ -30,7 +43,7 @@ export const RegisterPage = () => {
         emailValid,
         passwordValid,
         displayNameValid,
-        onResetForm
+        onResetForm,
     } = useForm(formInitialData, formValidations);
 
     const handleSubmit = (e) => {
@@ -86,8 +99,16 @@ export const RegisterPage = () => {
                     </Grid>
 
                     <Grid container spacing={2} sx={{ marginBlock: 1 }}>
+                        <Grid item xs={12} display={errorMessage ? "" : "none"}>
+                            <Alert severity="error">{errorMessage}</Alert>
+                        </Grid>
                         <Grid item xs={12}>
-                            <Button type="submit" variant="contained" fullWidth>
+                            <Button
+                                disabled={isCheckingAuthentication}
+                                type="submit"
+                                variant="contained"
+                                fullWidth
+                            >
                                 <Typography>Create Account</Typography>
                             </Button>
                         </Grid>
