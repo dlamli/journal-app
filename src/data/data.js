@@ -48,3 +48,9 @@ export const itemData = [
         title: "Bike",
     },
 ];
+
+export const formInitialData = {
+    email: "",
+    password: "",
+    displayName: "",
+};
