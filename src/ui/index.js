@@ -1,3 +1,1 @@
-export * from "src/ui/NavBar";
-export * from "src/ui/SideBar";
-export * from "src/ui/ImageGallery";
+export * from 'src/ui/components'
