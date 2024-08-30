@@ -6,7 +6,13 @@ import {
     RouterProvider,
 } from "react-router-dom";
 
-import { STATUS_AUTHENTICATED, STATUS_CHECKING } from "src/data/data";
+import {
+    AUTH_LOGIN_PATH,
+    AUTH_OTHER_PATH,
+    OTHER_PATH,
+    STATUS_AUTHENTICATED,
+    STATUS_CHECKING,
+} from "src/data/data";
 import { Auth } from "src/auth/routes/Auth.routes";
 import { Journal } from "src/journal/routes/Journal.routes";
 import { CheckingAuth } from "src/ui";
@@ -24,11 +30,14 @@ export const AppRouter = () => {
         createRoutesFromElements(
             <Route>
                 {status === STATUS_AUTHENTICATED ? (
-                    <Route path="/*" element={<Journal />} />
+                    <Route path={OTHER_PATH} element={<Journal />} />
                 ) : (
-                    <Route path="/auth/*" element={<Auth />} />
+                    <Route path={AUTH_OTHER_PATH} element={<Auth />} />
                 )}
-                <Route path="/*" element={<Navigate to="/auth/login" />} />
+                <Route
+                    path={OTHER_PATH}
+                    element={<Navigate to={AUTH_LOGIN_PATH} />}
+                />
             </Route>
         )
     );

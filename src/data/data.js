@@ -61,6 +61,26 @@ const AUTH_STATUS = {
     STATUS_CHECKING: "checking",
 };
 
+const URL_PATH = {
+    AUTH_REGISTER_PATH: "/auth/register",
+    AUTH_LOGIN_PATH: "/auth/login",
+    AUTH_OTHER_PATH: "/auth/*",
+    HOME_PATH: "/",
+    OTHER_PATH: "/*",
+    LOGIN_PATH: "/login",
+    REGISTER_PATH: "/register",
+};
+
+export const {
+    LOGIN_PATH,
+    REGISTER_PATH,
+    AUTH_OTHER_PATH,
+    OTHER_PATH,
+    HOME_PATH,
+    AUTH_LOGIN_PATH,
+    AUTH_REGISTER_PATH,
+} = URL_PATH;
+
 export const {
     STATUS_NOT_AUTHENTICATED,
     STATUS_AUTHENTICATED,

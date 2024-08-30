@@ -14,7 +14,7 @@ import {
 import { AuthLayout } from "src/auth";
 import { useForm } from "src/hooks";
 import { checkGoogleSignIn, startLoginWithEmailPassword } from "src/store";
-import { formInitialData, STATUS_CHECKING } from "src/data/data";
+import { AUTH_REGISTER_PATH, formInitialData, STATUS_CHECKING } from "src/data/data";
 
 export const LoginPage = () => {
     const dispatch = useDispatch();
@@ -112,7 +112,7 @@ export const LoginPage = () => {
                     >
                         <Link
                             color="primary.main"
-                            to="/auth/register"
+                            to={AUTH_REGISTER_PATH}
                             component={RouterLink}
                         >
                             Create account

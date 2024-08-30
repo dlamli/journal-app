@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
+import { AUTH_LOGIN_PATH } from "src/data/data";
 import { starLogout } from "src/store";
 
 export const NavBar = ({ drawerWidth }) => {
@@ -51,7 +52,7 @@ export const NavBar = ({ drawerWidth }) => {
                     <Typography variant="h6" nowrap="true" component="div">
                         JournalApp
                     </Typography>
-                    <Link component={RouterLink} to="/auth/login">
+                    <Link component={RouterLink} to={AUTH_LOGIN_PATH}>
                         <IconButton color="error" onClick={handleLogout}>
                             <LogoutOutlined />
                         </IconButton>

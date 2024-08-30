@@ -12,7 +12,7 @@ import {
 
 import { AuthLayout } from "src/auth";
 import { useForm } from "src/hooks";
-import { formInitialData, STATUS_CHECKING } from "src/data/data";
+import { AUTH_LOGIN_PATH, formInitialData, STATUS_CHECKING } from "src/data/data";
 import { startCreatingUserWithEmailPassword } from "src/store";
 
 export const RegisterPage = () => {
@@ -129,7 +129,7 @@ export const RegisterPage = () => {
                         </Typography>
                         <Link
                             color="primary.main"
-                            to="/auth/login"
+                            to={AUTH_LOGIN_PATH}
                             component={RouterLink}
                         >
                             Login
