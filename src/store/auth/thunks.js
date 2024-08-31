@@ -44,19 +44,15 @@ export const startCreatingUserWithEmailPassword = ({
     };
 };
 
-export const startLoginWithEmailPassword = ({
-    email,
-    password,
-    displayName,
-}) => {
+export const startLoginWithEmailPassword = ({ email, password }) => {
     return async (dispatch) => {
         dispatch(checkCredentials());
 
-        const { ok, uid, photoURL, errorMessage } = await loginUser({
-            email,
-            password,
-            displayName,
-        });
+        const { ok, displayName, uid, photoURL, errorMessage } =
+            await loginUser({
+                email,
+                password,
+            });
 
         if (!ok) return dispatch(logout({ errorMessage }));
 
