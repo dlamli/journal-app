@@ -1,5 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const updateNoteContent = (notes = [], payloadInfo) => {
+    return notes.map((note) => {
+        if (note.id === payloadInfo.id) {
+            return payloadInfo;
+        }
+        return note;
+    });
+};
+
 export const journalSlice = createSlice({
     name: "journal",
     initialState: {
@@ -25,22 +34,47 @@ export const journalSlice = createSlice({
         },
         setActiveNote: (state, { payload }) => {
             state.active = payload;
+            state.messageSaved = "";
         },
         setNotes: (state, { payload }) => {
             state.notes = payload;
         },
-        setSaving: (state, { payload }) => {},
-        updateNote: (state, { payload }) => {},
-        deleteNoteById: (state, { payload }) => {},
+        setSaving: (state) => {
+            state.isSaving = true;
+            state.messageSaved = "";
+        },
+        setPhotosToActiveNote: (state, { payload }) => {
+            state.active.imgUrls = [...state.active.imgUrls, ...payload];
+            state.isSaving = false;
+        },
+        updatedNote: (state, { payload }) => {
+            state.isSaving = false;
+            state.notes = updateNoteContent(state.notes, payload);
+            state.messageSaved = `${payload.title}, updated correctly`;
+        },
+        clearNotesLogout: (state) => {
+            state.isSaving = false;
+            state.messageSaved = '';
+            state.notes = [];
+            state.active = null;
+        },
+        deleteNoteById: (state, { payload }) => {
+            state.isSaving = false;
+            state.notes = state.notes.filter((note) => note.id!== payload);
+            state.active = null;
+            state.messageSaved = `${payload.title}, deleted successfully`;
+        },
     },
 });
 
 export const {
-    savingNewNote,
     addNewEmptyNote,
+    clearNotesLogout,
+    deleteNoteById,
+    savingNewNote,
     setActiveNote,
     setNotes,
+    setPhotosToActiveNote,
     setSaving,
-    updateNote,
-    deleteNoteById,
+    updatedNote,
 } = journalSlice.actions;
