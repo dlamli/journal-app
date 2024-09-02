@@ -53,6 +53,7 @@ export const NoteView = () => {
 
     const handleDeleteNote = () => {
         dispatch(startDeleteNote());
+        Swal.fire("Note deleted ", messageSaved, "success");
     };
     return (
         <Grid
